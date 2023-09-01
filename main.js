@@ -1,6 +1,24 @@
 import './style.css'
 
+import Split from 'split-grid'
+
 const $ = selector => document.querySelector(selector)
+
+
+Split({
+  minSize: 300,
+  snapOffset: 0,
+  columnGutters: [{
+      track: 1,
+      element: $('.gutter-col-1'),
+  }],
+  rowGutters: [{
+      track: 1,
+      element: $('.gutter-row-1'),
+  }]
+})
+
+
 
 const $js = $('#js')
 const $css = $('#css')
@@ -31,10 +49,10 @@ const createHtml = () =>{
     </style>
     </head>
     <body>
+      ${html}
       <script>
       ${js}
       </script>
-      ${html}
     </body>
    
   </html>
