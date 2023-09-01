@@ -18,8 +18,6 @@ Split({
   }]
 })
 
-
-
 const $js = $('#js')
 const $css = $('#css')
 const $html = $('#html')
@@ -30,16 +28,22 @@ $html.addEventListener('input', update)
 
 
 function update (){
-  const html = createHtml()
+  
+  let html = $html.value
+  const css = $css.value
+  const js = $js.value
+
+  const hashedcode = `${window.btoa(html)} | ${window.btoa(css)} | ${window.btoa(js)}`
+
+  history.replaceState(null,null, `/${hashedcode}`)
+
+
+  html = createHtml({html,js,css})
   
   $('iframe').setAttribute('srcdoc', html)
 } 
 
-const createHtml = () =>{
-  const html = $html.value
-  const css = $css.value
-  const js = $js.value
-
+const createHtml = ({html,js, css}) =>{
   return `
   <!DOCTYPE html>
   <html lang="en">
@@ -57,6 +61,5 @@ const createHtml = () =>{
    
   </html>
   `
-
 }
 
